@@ -1,0 +1,74 @@
+<div class="row">
+  <div class="col-md-6">
+    <h2>New operation</h2>
+    <form class="form-horizontal"
+      name="transferForm">
+      <div class="form-group">
+        <label class="control-label col-sm-2">Operation:</label>
+        <div class="col-sm-10">
+          <select class="form-control"
+            ng-model="vm.operationType"
+            required>
+            <option>Transfer</option>
+            <option>Deposit</option>
+            <option>Withdrawal</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group"
+        ng-show="vm.operationType != 'Deposit'">
+        <label class="control-label col-sm-2">Account from:</label>
+        <div class="col-sm-10">
+          <select class="form-control"
+            ng-options="account as (account.accountNumber + ': ' + account.balance + ' PLN')  for account in vm.accounts"
+            ng-model="vm.selectedAccountFrom"
+            ng-required="vm.operationType != 'Deposit'">
+            <option value="" disabled selected>Your account number</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group"
+        ng-show="vm.operationType != 'Withdrawal'">
+        <label class="control-label col-sm-2">Account to:</label>
+        <div class="col-sm-10">
+          <input type="text"
+            class="form-control"
+            ng-model="vm.accountTo"
+            placeholder="Recipent's account number"
+            ng-required="vm.operationType != 'Withdrawal'">
+        </div>
+      </div>
+      <div class="form-group"
+        ng-show="vm.operationType == 'Transfer'">
+        <label class="control-label col-sm-2">Transfer name:</label>
+        <div class="col-sm-10">
+          <input type="text"
+            class="form-control"
+            ng-model="vm.title"
+            placeholder="Transfer name"
+            ng-required="vm.operationType == 'Transfer'">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2">Amount:</label>
+        <div class="col-sm-10">
+          <input class="form-control"
+            type="number"
+            string-to-number
+            ng-model="vm.amount"
+            min=0
+            placeholder="Amount to be transferred"
+            required>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit"
+            ng-disabled="transferForm.$invalid"
+            class="btn btn-info"
+            ng-click="vm.submitOperation()">Submit operation</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,62 @@
+{
+    "serverConfig": {
+        "host": "localhost",
+        "port": 8080
+    },
+    "dbConfig": {
+        "dbHost": "localhost",
+        "dbName": "bankDB",
+        "port": 27017
+    },
+    "realmConfig": {
+        "bankId": "00109781",
+        "bankUsername": "admin",
+        "bankPassword": "admin",
+        "checkSum": "00",
+        "maxDebit": 100
+    },
+    "bankAddresses": {
+        "00129613": {
+            "address": "150.254.131.68",
+            "port": 8082,
+            "username": "admin",
+            "password": "admin"
+        },
+        "00109569": {
+            "address": "150.254.131.76",
+            "port": 8080,
+            "username": "admin",
+            "password": "admin"
+        },
+        "00129682": {
+            "address": "150.254.131.70",
+            "port": 8080,
+            "username": "admin",
+            "password": "admin"
+        },
+        "00109708": {
+            "address": "150.254.131.69",
+            "port": 8081,
+            "username": "admin",
+            "password": "admin"
+        },
+        "00109562": {
+            "address": "150.254.131.79",
+            "port": 8080,
+            "username": "admin",
+            "password": "admin"
+        },
+        "00111071": {
+            "address": "150.254.131.66",
+            "port": 8080,
+            "username": "admin",
+            "password": "admin"
+        },
+        "00109754": {
+            "address": "150.254.131.71",
+            "port": 8080,
+            "username": "admin",
+            "password": "admin"
+        }
+    }
+}

@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1">
+
+  <title>Bank client</title>
+  <link rel="stylesheet"
+    type="text/css"
+    href="components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet"
+    type="text/css"
+    href="components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet"
+    type="text/css"
+    href="components/rdash-ui/dist/css/rdash.min.css">
+  <link rel="stylesheet"
+    type="text/css"
+    href="webapp/my-accounts/my-accounts-styles.css">
+  <link rel="stylesheet"
+    type="text/css"
+    href="webapp/menu/menu-styles.css">
+
+  <script type="text/javascript"
+    src="components/angular/angular.min.js"></script>
+  <script type="text/javascript"
+    src="components/angular-route/angular-route.min.js"></script>
+  <script type="text/javascript"
+    src="components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+  <script type="text/javascript"
+    src="components/angular-cookies/angular-cookies.min.js"></script>
+
+  <script type="text/javascript"
+    src="dist/scripts.js"></script>
+</head>
+
+<body ng-controller="MasterCtrl">
+  <div id="page-wrapper"
+    ng-class="{'open': toggle}"
+    ng-cloak>
+
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper"
+      ng-show="isLoggedIn()">
+      <ul class="sidebar">
+        <li class="sidebar-main">
+          <a ng-click="toggleSidebar()">
+            Dashboard
+            <span class="menu-icon glyphicon glyphicon-transfer"></span>
+          </a>
+        </li>
+        <li class="sidebar-title"><span>MENU</span></li>
+        <li class="sidebar-list">
+          <a href="#/">My accounts <span class="menu-icon fa fa-book"></span></a>
+        </li>
+        <li class="sidebar-list">
+          <a href="#/transfers">Transfers <span class="menu-icon fa fa-arrows-h"></span></a>
+        </li>
+      </ul>
+    </div>
+    <!-- End Sidebar -->
+
+    <div id="content-wrapper">
+      <div class="page-content">
+
+        <!-- Header Bar -->
+        <div class="row header"
+          ng-show="isLoggedIn()">
+          <div class="col-xs-12">
+            <div class="user pull-right">
+              <div class="item dropdown"
+                uib-dropdown>
+                <a href="#"
+                  class="dropdown-toggle"
+                  uib-dropdown-toggle>
+                  <img src="img/avatar.jpg">
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right">
+                  <li class="dropdown-header">
+                    {{currentUsername()}}
+                  </li>
+                  <li class="divider"></li>
+                  <li class="link">
+                    <a ng-click="logout()"
+                      class="text-center cursor-pointer">
+                      Logout
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="meta">
+              <div class="page">
+                Dashboard
+              </div>
+              <div class="breadcrumb-links">
+                Home / Dashboard
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End Header Bar -->
+
+        <!-- Main Content -->
+        <div ng-view></div>
+
+      </div>
+      <!-- End Page Content -->
+    </div>
+    <!-- End Content Wrapper -->
+  </div>
+  <!-- End Page Wrapper -->
+</body>
+
+</html>

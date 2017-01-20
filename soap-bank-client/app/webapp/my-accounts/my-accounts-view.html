@@ -1,0 +1,68 @@
+<div class="row">
+	<div class="col-lg-4">
+		<rd-widget>
+			<rd-widget-header icon="fa-book"
+				title="Accounts">
+				<button class="btn btn-sm btn-info"
+					ng-click="vm.createNewAccount()">Create new account</button>
+			</rd-widget-header>
+			<rd-widget-body classes="medium no-padding">
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<tr>
+								<td class="text-right">Account number</td>
+								<td class="text-right">Balance</td>
+								<td class="text-center">Created</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="account in vm.accounts"
+								ng-click="vm.getAccountHistory(account.accountNumber)">
+								<td class="text-right cursor-pointer">{{account.accountNumber}}</td>
+								<td class="text-right">{{account.balance | currency : 'PLN'}}</td>
+								<td class="text-center">{{account.created | date:'dd.MM.yyyy HH:mm:ss'}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</rd-widget-body>
+		</rd-widget>
+	</div>
+	<div class="col-lg-8">
+		<rd-widget>
+			<rd-widget-header icon="fa-exchange"
+				title="Transactions">
+				<span>{{vm.selectedAccountNumber}}</span>
+			</rd-widget-header>
+			<rd-widget-body classes="medium no-padding">
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<tr>
+								<td class="text-right">Account from</td>
+								<td class="text-right">Account to</td>
+								<td class="text-center">Type</td>
+								<td class="text-left">Title</td>
+								<td class="text-right">Amount</td>
+								<td class="text-right">Balance</td>
+								<td class="text-center">Date</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="transaction in vm.transactions">
+								<td class="text-right">{{transaction.accountFrom}}</td>
+								<td class="text-right">{{transaction.accountTo}}</td>
+								<td class="text-center">{{transaction.operation}}</td>
+								<td class="text-left">{{transaction.title}}</td>
+								<td class="text-right">{{transaction.amount | currency : 'PLN'}}</td>
+								<td class="text-right">{{transaction.balanceAfter | currency : 'PLN'}}</td>
+								<td class="text-center">{{transaction.timestamp | date:'dd.MM.yyyy HH:mm:ss'}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</rd-widget-body>
+		</rd-widget>
+	</div>
+</div>

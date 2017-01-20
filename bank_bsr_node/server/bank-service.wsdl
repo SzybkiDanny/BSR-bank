@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="bank" targetNamespace="http://localhost:8080/bank" 
+    xmlns="http://localhost:8080/bank" 
+    xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" 
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+    xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <wsdl:types>
+        <xs:schema elementFormDefault="qualified" targetNamespace="">
+            <xs:complexType name='ArrayOfString'>
+                <xs:sequence>
+                    <xs:element name='item' type='xs:string' maxOccurs='unbounded'/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="AccountInfo">
+                <xs:sequence>
+                    <xs:element minOccurs="1" maxOccurs="1" name="accountNumber" type="xs:string" />
+                    <xs:element minOccurs="1" maxOccurs="1" name="balance" type="xs:int" />
+                    <xs:element minOccurs="1" maxOccurs="1" name="created" type="xs:dateTime" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name='ArrayOfAccountInfo'>
+                <xs:sequence>
+                    <xs:element name='item' type='AccountInfo' maxOccurs='unbounded'/>
+                </xs:sequence>
+            </xs:complexType>
+             <xs:complexType name="TransactionInfo">
+                <xs:sequence>
+                    <xs:element minOccurs="1" maxOccurs="1" name="accountFrom" type="xs:string" />
+                    <xs:element minOccurs="1" maxOccurs="1" name="accountTo" type="xs:string" />
+                    <xs:element minOccurs="1" maxOccurs="1" name="amount" type="xs:int" />
+                    <xs:element minOccurs="1" maxOccurs="1" name="title" type="xs:string" />
+                    <xs:element minOccurs="1" maxOccurs="1" name="balanceAfter" type="xs:int" />
+                    <xs:element minOccurs="1" maxOccurs="1" name="operationType" type="xs:string" />
+                    <xs:element minOccurs="1" maxOccurs="1" name="created" type="xs:dateTime" />
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name='ArrayOfTransactionInfo'>
+                <xs:sequence>
+                    <xs:element name='item' type='TransactionInfo' maxOccurs='unbounded'/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+    </wsdl:types>
+
+    <wsdl:message name="loginRequest">
+        <wsdl:part name="username" type="xs:string"/>
+        <wsdl:part name="password" type="xs:string"/>
+    </wsdl:message>
+    <wsdl:message name="loginResponse">
+        <wsdl:part name="result" type="xs:boolean"/>
+    </wsdl:message>
+    <wsdl:message name="createUserRequest">
+        <wsdl:part name="username" type="xs:string"/>
+        <wsdl:part name="password" type="xs:string"/>
+    </wsdl:message>
+    <wsdl:message name="createUserResponse">
+        <wsdl:part name="result" type="xs:boolean"/>
+    </wsdl:message>
+    <wsdl:message name="createAccountRequest">
+    </wsdl:message>
+    <wsdl:message name="createAccountResponse">
+        <wsdl:part name="result" type="xs:boolean"/>
+    </wsdl:message>
+    <wsdl:message name="getAccountListRequest">
+    </wsdl:message>
+    <wsdl:message name="getAccountListResponse">
+        <wsdl:part name="accounts" type="ArrayOfAccountInfo"/>
+    </wsdl:message>
+    <wsdl:message name="getAccountHistoryRequest">
+        <wsdl:part name="accountNumber" type="xs:string"/>
+    </wsdl:message>
+    <wsdl:message name="getAccountHistoryResponse">
+        <wsdl:part name="accounts" type="ArrayOfTransactionInfo"/>
+    </wsdl:message>
+    <wsdl:message name="transferMoneyRequest">
+        <wsdl:part name="accountFrom" type="xs:string"/>
+        <wsdl:part name="accountTo" type="xs:string"/>
+        <wsdl:part name="title" type="xs:string"/>
+        <wsdl:part name="amount" type="xs:int"/>
+    </wsdl:message>
+    <wsdl:message name="transferMoneyResponse">
+        <wsdl:part name="result" type="xs:boolean"/>
+    </wsdl:message>
+    <wsdl:message name="depositMoneyRequest">
+        <wsdl:part name="accountTo" type="xs:string"/>
+        <wsdl:part name="amount" type="xs:int"/>
+    </wsdl:message>
+    <wsdl:message name="depositMoneyResponse">
+        <wsdl:part name="result" type="xs:boolean"/>
+    </wsdl:message>
+    <wsdl:message name="withdrawMoneyRequest">
+        <wsdl:part name="accountFrom" type="xs:string"/>
+        <wsdl:part name="amount" type="xs:int"/>
+    </wsdl:message>
+    <wsdl:message name="withdrawMoneyResponse">
+        <wsdl:part name="result" type="xs:boolean"/>
+    </wsdl:message>
+
+
+    <wsdl:portType name="AccountPort">
+        <wsdl:operation name="login">
+            <wsdl:input message="loginRequest"/>
+            <wsdl:output message="loginResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="createUser">
+            <wsdl:input message="createUserRequest"/>
+            <wsdl:output message="createUserResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="createAccount">
+            <wsdl:input message="createAccountRequest"/>
+            <wsdl:output message="createAccountResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getAccountList">
+            <wsdl:input message="getAccountListRequest"/>
+            <wsdl:output message="getAccountListResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getAccountHistory">
+            <wsdl:input message="getAccountHistoryRequest"/>
+            <wsdl:output message="getAccountHistoryResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="transferMoney">
+            <wsdl:input message="transferMoneyRequest"/>
+            <wsdl:output message="transferMoneyResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="depositMoney">
+            <wsdl:input message="depositMoneyRequest"/>
+            <wsdl:output message="depositMoneyResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="withdrawMoney">
+            <wsdl:input message="withdrawMoneyRequest"/>
+            <wsdl:output message="withdrawMoneyResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="AccountBinding" type="AccountPort">
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="login">
+            <soap:operation soapAction="login"/>
+            <wsdl:input>
+                <soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="createUser">
+            <soap:operation soapAction="createUser"/>
+            <wsdl:input>
+                <soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="createAccount">
+            <soap:operation soapAction="createAccount"/>
+            <wsdl:output>
+                <soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAccountList">
+            <soap:operation soapAction="getAccountList"/>
+            <wsdl:output>
+                <soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAccountHistory">
+            <soap:operation soapAction="getAccountHistory"/>
+            <wsdl:input>
+                <soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="transferMoney">
+            <soap:operation soapAction="transferMoney"/>
+            <wsdl:input>
+                <soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="depositMoney">
+            <soap:operation soapAction="depositMoney"/>
+            <wsdl:input>
+                <soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="withdrawMoney">
+            <soap:operation soapAction="withdrawMoney"/>
+            <wsdl:input>
+                <soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="Bank">
+        <wsdl:port binding="AccountBinding" name="AccountService">
+            <soap:address location="http://localhost:8080/bank"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
