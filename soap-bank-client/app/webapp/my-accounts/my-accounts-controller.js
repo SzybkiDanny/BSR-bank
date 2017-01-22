@@ -1,6 +1,7 @@
 angular.module('BankClient')
     .controller('AccountsCtrl', ['$scope', 'AccountService', AccountsCtrl]);
 
+// Controller for accounts page
 function AccountsCtrl($scope, AccountService) {
     var vm = this;
     vm.selectedAccountNumber = null;
@@ -9,12 +10,14 @@ function AccountsCtrl($scope, AccountService) {
 
     refreshAccountList();
 
+    // Submitting account creation request
     vm.createNewAccount = () => {
         AccountService.createAccount(() => {
             refreshAccountList();
         })
     }
 
+    // Submitting request for account history
     vm.getAccountHistory = (accountNumber) => {
         vm.selectedAccountNumber = accountNumber;
         AccountService.getAccountHistory(accountNumber, (transactions) => {

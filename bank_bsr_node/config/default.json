@@ -1,20 +1,23 @@
 {
+    // Server configuration
     "serverConfig": {
         "host": "localhost",
         "port": 8080
     },
+    // Database configuration
     "dbConfig": {
         "dbHost": "localhost",
         "dbName": "bankDB",
         "port": 27017
     },
+    // Bank configuration
     "realmConfig": {
         "bankId": "00109781",
         "bankUsername": "admin",
         "bankPassword": "admin",
-        "checkSum": "00",
         "maxDebit": 100
     },
+    // Other banks info
     "bankAddresses": {
         "00129613": {
             "address": "150.254.131.68",

@@ -38,6 +38,7 @@ function createValidAccountNumber(constant) {
     }
 }
 
+// User authentication
 function login(username, password, callback) {
     User.findOne({
         username: username,
@@ -50,6 +51,7 @@ function login(username, password, callback) {
     });
 }
 
+// Creating new user
 function createUser(username, password, callback) {
     console.log('create user');
     User.create({
@@ -63,6 +65,7 @@ function createUser(username, password, callback) {
     });
 }
 
+// Creating new bank account for user
 function createAccount(user, callback) {
     Account.count({}, (err, count) => {
         if (err)
@@ -89,6 +92,7 @@ function createAccount(user, callback) {
     });
 }
 
+// Returns list of user accounts
 function getAccountList(user, callback) {
     User.findOne({
         username: user.username,
@@ -102,6 +106,7 @@ function getAccountList(user, callback) {
     });
 }
 
+// Returns list of operations for the account
 function getAccountHistory(accountNumber, callback) {
     Transaction.find({
         accountPerspective: accountNumber
@@ -113,6 +118,7 @@ function getAccountHistory(accountNumber, callback) {
     });
 }
 
+// Checking if user is owner of the account
 function isUserAccountOwner(user, accountNumber, success, failure) {
     if (getBankId(accountNumber) != realmConfig.bankId)
         return success();

@@ -1,6 +1,7 @@
 angular.module('BankClient')
     .factory('TransferService', ['$rootScope', TransferService]);
 
+// Service for money transferring operations
 function TransferService($rootScope) {
     var soapClient = $rootScope.soap.soapClient;
 
@@ -16,6 +17,7 @@ function TransferService($rootScope) {
     }
 
     var serviceInstance = {
+        // Transferring money to another account
         makeTransfer: (accountFrom, accountTo, title, amount, success, failure) => {
             soapClient.transferMoney({
                 accountFrom: accountFrom,
@@ -29,6 +31,7 @@ function TransferService($rootScope) {
                     success(res);
             })
         },
+        // Deposi money to account
         makeDeposit: (accountTo, amount, success, failure) => {
             soapClient.depositMoney({
                 accountTo: accountTo,
@@ -40,6 +43,7 @@ function TransferService($rootScope) {
                     success(res);
             })
         },
+        // Withdrawing money from account
         makeWithdrawal: (accountFrom, amount, success, failure) => {
             soapClient.withdrawMoney({
                 accountFrom: accountFrom,

@@ -10,6 +10,7 @@ var Transaction = require('../models/transaction');
 var realmConfig = config.get('realmConfig');
 var bankAddresses = config.get('bankAddresses');
 
+// Handling money trasnfers
 function makeMoneyTransfer(accountFrom, accountTo, title, amount, callback) {
     if (amount <= 0)
         return callback({ result: false, error: 'The amount must be positive' });
@@ -81,6 +82,7 @@ function makeMoneyTransfer(accountFrom, accountTo, title, amount, callback) {
     }
 }
 
+// Handling money deposits
 function makeMoneyDeposit(accountTo, amount, callback) {
     if (amount <= 0)
         return callback({ result: false, error: 'The amount must be positive' });
@@ -97,6 +99,7 @@ function makeMoneyDeposit(accountTo, amount, callback) {
         return callback({ result: false, error: 'Cannot deposit money in another bank' });
 }
 
+// Handling money withdrawals
 function makeMoneyWithdrawal(accountFrom, amount, callback) {
     if (amount <= 0)
         return callback({ result: false, error: 'The amount must be positive' });

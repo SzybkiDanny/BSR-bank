@@ -16,6 +16,8 @@ var realmConfig = config.get('realmConfig');
 var xml = fs.readFileSync('server/bank-service.wsdl', 'utf8');
 var app = express();
 var jsonParser = bodyParser.json();
+
+// Bank authentication
 var bankAuthenticator = basicAuth((username, password) => {
     return realmConfig.bankUsername == username &&
         realmConfig.bankPassword == password;
@@ -23,6 +25,7 @@ var bankAuthenticator = basicAuth((username, password) => {
 
 mongoose.connect(`mongodb://${dbConfig.dbHost}:${dbConfig.port}/${dbConfig.dbName}`);
 
+// Handling incoming transfers
 app.post('/accounts/:accountNumber', bankAuthenticator, jsonParser, (req, res) => {
     var accountFrom = req.body.from;
     var accountTo = req.params.accountNumber;

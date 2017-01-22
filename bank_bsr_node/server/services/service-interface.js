@@ -6,17 +6,21 @@ import * as transferService from './transfer-service';
 var config = require('config');
 var realmConfig = config.get('realmConfig');
 
+// Contract for endpoint
 var service = {
     Bank: {
         AccountService: {
+            // User sign in
             login: (args, cb) => {
                 accountService.login(args.username, args.password, cb);
             },
 
+            // User creation
             createUser: (args, cb) => {
                 accountService.createUser(args.username, args.password, cb);
             },
 
+            // Account creation
             createAccount: (args, cb, headers, req) => {
                 var userInfo = getUserInfoFromBase64(req.headers.authorization);
                 var success = () => {
@@ -29,6 +33,7 @@ var service = {
                 authenticateUser(userInfo, success, failure);
             },
 
+            // Fetching user accounts list
             getAccountList: (args, cb, headers, req) => {
                 var userInfo = getUserInfoFromBase64(req.headers.authorization);
                 var success = () => {
@@ -41,6 +46,7 @@ var service = {
                 authenticateUser(userInfo, success, failure);
             },
 
+            // Fetching account history
             getAccountHistory: (args, cb, headers, req) => {
                 if (!isAccountFormatCorrect(args.accountNumber))
                     return cb({ result: false, error: "Incorrect account number" });
@@ -60,6 +66,7 @@ var service = {
                 }, failure);
             },
 
+            // Money transfers
             transferMoney: (args, cb, headers, req) => {
                 if (!isAccountFormatCorrect(args.accountFrom))
                     return cb({ result: false, error: "Incorrect sender account number" });
@@ -88,6 +95,7 @@ var service = {
                 }, failure);
             },
 
+            // Money deposits 
             depositMoney: (args, cb, headers, req) => {
                 if (!isAccountFormatCorrect(args.accountTo))
                     return cb({ result: false, error: "Incorrect recipient account number" });
@@ -103,6 +111,7 @@ var service = {
                 authenticateUser(userInfo, success, failure);
             },
 
+            // Money withdrawals
             withdrawMoney: (args, cb, headers, req) => {
                 if (!isAccountFormatCorrect(args.accountFrom))
                     return cb({ result: false, error: "Incorrect sender account number" });

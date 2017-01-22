@@ -1,6 +1,7 @@
 angular.module('BankClient')
     .factory('AccountService', ['$rootScope', AccountService]);
 
+// Service for account related operations
 function AccountService($rootScope) {
     var soapClient = $rootScope.soap.soapClient;
 
@@ -16,6 +17,7 @@ function AccountService($rootScope) {
     }
 
     var serviceInstance = {
+        // Creating new account
         createAccount: (success, failure) => {
             soapClient.createAccount(null, (err, res) => {
                 if (isErrorResponse(err, res) || !res.result)
@@ -24,6 +26,7 @@ function AccountService($rootScope) {
                     success(res);
             })
         },
+        // Fetching list of accounts
         getAccountList: (success, failure) => {
             soapClient.getAccountList(null, (err, res) => {
                 if (isErrorResponse(err, res))
@@ -34,6 +37,7 @@ function AccountService($rootScope) {
                 }
             })
         },
+        // Fetching account history
         getAccountHistory: (accountNumber, success, failure) => {
             soapClient.getAccountHistory({ accountNumber: accountNumber }, (err, res) => {
                 if (isErrorResponse(err, res))

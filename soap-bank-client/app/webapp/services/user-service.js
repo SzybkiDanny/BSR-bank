@@ -1,6 +1,7 @@
 angular.module('BankClient')
     .factory('UserService', ['$rootScope', UserService]);
 
+// Service for user related operations
 function UserService($rootScope) {
     var soapClient = $rootScope.soap.soapClient;
 
@@ -16,6 +17,7 @@ function UserService($rootScope) {
     }
 
     var serviceInstance = {
+        // Registering new user account
         registerUser: (username, password, success, failure) => {
             soapClient.createUser({ username: username, password: password }, (err, res) => {
                 if (isErrorResponse(err, res) || !res.result)

@@ -1,6 +1,7 @@
 angular.module('BankClient')
     .controller('TransfersCtrl', ['$scope', 'AccountService', 'TransferService', TransfersCtrl]);
 
+// Controller for money transferring page
 function TransfersCtrl($scope, AccountService, TransferService) {
     var vm = this;
     vm.accounts = [];
@@ -12,6 +13,7 @@ function TransfersCtrl($scope, AccountService, TransferService) {
 
     refreshAccountList();
 
+    // Submitting client operation
     vm.submitOperation = () => {
         if (vm.operationType == 'Transfer') {
             TransferService.makeTransfer(vm.selectedAccountFrom.accountNumber, vm.accountTo, vm.title, vm.amount,
